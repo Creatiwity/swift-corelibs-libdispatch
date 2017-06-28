@@ -62,7 +62,11 @@ _dispatch_lock_owner(dispatch_lock lock_value)
 #if !defined(__x86_64__) && !defined(__i386__) && !defined(__s390x__)
 #include <linux/membarrier.h>
 #endif
+#if defined(__ANDROID__)
+#include <asm/unistd.h>
+#else
 #include <unistd.h>
+#endif
 #include <sys/syscall.h>   /* For SYS_xxx definitions */
 
 typedef pid_t dispatch_tid;
