@@ -92,10 +92,9 @@ AC_ARG_ENABLE([android],
 
   sysroot=${android_ndk}/platforms/android-${android_api_level}/arch-${arch}
   toolchain=${android_ndk}/toolchains/${host_alias}-${android_ndk_gcc_version}/prebuilt/linux-${build_cpu}
-  include="-I${android_ndk}/sysroot/usr/include -I${android_ndk}/sysroot/usr/include/${host_alias} -I${sysroot}/usr/include"
 
-  CFLAGS="$CFLAGS -target ${host_alias} --sysroot=${sysroot} -B${toolchain}/${host_alias}/bin ${include} -DDISPATCH_USE_DTRACE=0 -fuse-ld=/usr/bin/${host}-ld.gold"
-  CXXFLAGS="$CXXFLAGS -target ${host_alias} --sysroot=${sysroot} -B${toolchain}/${host_alias}/bin ${include} -DDISPATCH_USE_DTRACE=0 -fuse-ld=/usr/bin/${host}-ld.gold"
+  CFLAGS="$CFLAGS -target ${host_alias} --sysroot=${sysroot} -B${toolchain}/${host_alias}/bin -DDISPATCH_USE_DTRACE=0"
+  CXXFLAGS="$CXXFLAGS -target ${host_alias} --sysroot=${sysroot} -B${toolchain}/${host_alias}/bin -DDISPATCH_USE_DTRACE=0"
   SWIFTC_FLAGS="-target ${host} -sdk ${sysroot} -L${toolchain}/lib/gcc/${host_alias}/${android_ndk_gcc_version}.x -use-ld=/usr/bin/${host}-ld.gold"
   LIBS="$LIBS -L${toolchain}/lib/gcc/${host_alias}/${android_ndk_gcc_version}.x -L${android_ndk}/toolchains/${host_alias}-${android_ndk_gcc_version}/prebuilt/linux-x86_64/${host_alias}/lib -latomic"
   LDFLAGS="$LDFLAGS -Wc,'-target','${host_alias}','-B${toolchain}/${host_alias}/bin'"
